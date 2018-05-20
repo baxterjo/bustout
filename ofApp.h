@@ -1,10 +1,26 @@
 #pragma once
 
 #include "ofMain.h"
+#include "Paddle.h"
+#include "GameWorld.h"
+#include "Ball.h"
+#include "Brick.h"
 
 class ofApp : public ofBaseApp{
 
 	public:
+		GameWorld* gameWorld;
+		Paddle* paddle;
+		Brick* bricks[4][12];
+		Ball* balls[5];
+
+		enum Game_State{
+			PLAY,
+			WIN,
+			LOSE
+		};
+
+
 		void setup();
 		void update();
 		void draw();

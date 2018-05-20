@@ -5,7 +5,7 @@ void ofApp::setup(){
 	gameWorld = new GameWorld();
 	paddle = new Paddle();
 	gameWorld->fetchLevelLayout();
-	gameWorld->generateBlocks(Block* []);
+	gameWorld->generateBricks(Brick* []);
 	gameWorld->generateBalls();
 	
 }
@@ -17,24 +17,24 @@ void ofApp::update(){
 		if (ball->hitwall()) {
 			ball->bounceWall();
 		}
-		else if (ball->hitCeiling()) {
+		if (ball->hitCeiling()) {
 			ball->bounceCeiling();
 		}
-		else if (ball->hitPaddle()) {
+		if (ball->hitPaddle()) {
 			ball->bouncePaddle();
 		}
-		else if (ball->hitFloor()) {
+		if (ball->hitFloor()) {
 			ball->loseLife();
 		}
-		else if (ball->hitBrick()) {
+		if (ball->hitBrick()) {
 			ball->bounceBrick();
 			brick->damage();
 		}
-		else if (brick->noneLeft()) {
+		if (brick->noneLeft()) {
 			gameWorld->nextLevel();
 		}
-		else if (ball->noneLeft()) {
-			gameWorld->loser();
+		if (ball->noneLeft()) {
+			gameWorld->changeState(LOSE);
 		}
 	}
 }
@@ -42,13 +42,17 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
 	gameWorld->draw();
-	brick->draw();
-	paddle->draw();
+	if (gameWorld->getState() == PLAY) {
+		brick->draw();
+		paddle->draw();
+	}
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+	if (key == OF_KEY_RETURN && gameWorld->getState() == LOSE) {
+		gameWorld->changeState(PLAY);
+	}
 }
 
 //--------------------------------------------------------------
@@ -88,7 +92,7 @@ void ofApp::mouseExited(int x, int y){
 
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
-
+	gameWorld->resize();
 }
 
 //--------------------------------------------------------------
