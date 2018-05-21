@@ -2,24 +2,33 @@
 //Jordan Baxter
 
 #pragma once
-#include "ofApp.h"
+#include "ofMain.h"
 
 class Brick;
 class Ball;
 class Paddle;
+
+enum Game_State {
+	PLAY,
+	WIN,
+	LOSE
+};
 
 
 class GameWorld {
 public:
 	GameWorld();
 	void fetchLevelLayout(string file1, string file2, string file3);
-	Brick* generateBricks();
-	Ball* generateBalls();
 	void nextLevel();
-	void changeState(const int state);
+	void changeState(enum Game_State gs);
 	void draw();
-	void getState();
 	void resize();
+	void loseLife();
+	enum Game_State getState();
+	bool noBricks();
+	bool noLives();
+	//Brick* generateBricks();
+	//Ball* generateBalls();
 
 private:
 
@@ -29,5 +38,7 @@ private:
 	char levelLayout3[4][12];
 	enum Game_State gameState;
 	int level;
+	int lives;
 
+	
 };

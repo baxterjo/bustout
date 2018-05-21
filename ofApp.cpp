@@ -1,40 +1,50 @@
+//ofApp.cpp
+//Jordan Baxter
+
 #include "ofApp.h"
+#include "Paddle.h"
+#include "GameWorld.h"
+#include "Ball.h"
+#include "Brick.h"
 
 //--------------------------------------------------------------
 void ofApp::setup(){
 	gameWorld = new GameWorld();
 	paddle = new Paddle();
-	gameWorld->fetchLevelLayout();
-	gameWorld->generateBricks(Brick* []);
-	gameWorld->generateBalls();
+	//gameWorld->fetchLevelLayout();
+	//gameWorld->generateBricks();
+	//gameWorld->generateBalls();
 	
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	if (gameWorld->getState == PLAY) {
-		ball->move();
-		if (ball->hitwall()) {
-			ball->bounceWall();
+	if (gameWorld->getState() == PLAY) {
+		for (int i = 0; i < 5; ++i) {
+			balls[i]->move();
+			if (balls[i]->hitWall()) {
+				balls[i]->bounceWall();
+			}
+			if (balls[i]->hitCeiling()) {
+				balls[i]->bounceCeiling();
+			}
+			if (balls[i]->hitPaddle()) {
+				balls[i]->bouncePaddle();
+			}
+			if (balls[i]->hitFloor()) {
+				gameWorld->loseLife();
+			}
+			if (balls[i]->hitBrick()) {
+				balls[i]->bounceBrick();
+				//brick->damage();
+			}
 		}
-		if (ball->hitCeiling()) {
-			ball->bounceCeiling();
-		}
-		if (ball->hitPaddle()) {
-			ball->bouncePaddle();
-		}
-		if (ball->hitFloor()) {
-			ball->loseLife();
-		}
-		if (ball->hitBrick()) {
-			ball->bounceBrick();
-			brick->damage();
-		}
-		if (brick->noneLeft()) {
-			gameWorld->nextLevel();
-		}
-		if (ball->noneLeft()) {
+
+		if (gameWorld->noLives()) {
 			gameWorld->changeState(LOSE);
+		}
+		if (gameWorld->noBricks()) {
+			gameWorld->nextLevel();
 		}
 	}
 }
@@ -43,8 +53,11 @@ void ofApp::update(){
 void ofApp::draw(){
 	gameWorld->draw();
 	if (gameWorld->getState() == PLAY) {
-		brick->draw();
+		//bricks->draw();
 		paddle->draw();
+		for (int i = 0; i < 5; ++i) {
+			balls[i]->draw();
+		}
 	}
 }
 

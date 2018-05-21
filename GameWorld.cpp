@@ -4,7 +4,7 @@
 #include "GameWorld.h"
 #include "Ball.h"
 #include "Brick.h"
-#include "ofApp.h"
+#include "ofMain.h"
 
 GameWorld::GameWorld() {
 	this->gameState = PLAY;
@@ -25,6 +25,33 @@ void GameWorld::fetchLevelLayout(string file1, string file2, string file3) {
 	}
 }
 
-Brick* GameWorld::generateBricks() {
-
+void GameWorld::nextLevel() {
+	//TODO
 }
+void GameWorld::changeState(enum Game_State gs) {
+	//TODO
+}
+void GameWorld::draw() {
+	//TODO
+}
+void GameWorld::resize() {
+	//TODO
+}
+enum Game_State GameWorld::getState() {
+	//TODO
+	return PLAY;
+}
+bool GameWorld::noBricks() {
+	//TODO
+	return true;
+}
+bool GameWorld::noLives() {
+	//TODO
+	return true;
+}
+/*Brick* GameWorld::generateBricks() {
+	//TODO
+}
+Ball* GameWorld::generateBalls() {
+	//TODO
+}*/

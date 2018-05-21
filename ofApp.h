@@ -14,11 +14,6 @@ class ofApp : public ofBaseApp{
 		Brick* bricks[4][12];
 		Ball* balls[5];
 
-		enum Game_State{
-			PLAY,
-			WIN,
-			LOSE
-		};
 
 
 		void setup();
