@@ -37,6 +37,9 @@ void GameWorld::draw() {
 void GameWorld::resize() {
 	//TODO
 }
+void GameWorld::loseLife() {
+	//TODO
+}
 enum Game_State GameWorld::getState() {
 	//TODO
 	return PLAY;
