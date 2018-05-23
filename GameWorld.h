@@ -4,6 +4,7 @@
 #pragma once
 #include "ofMain.h"
 
+
 class Brick;
 class Ball;
 class Paddle;

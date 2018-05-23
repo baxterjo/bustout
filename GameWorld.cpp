@@ -12,16 +12,19 @@ GameWorld::GameWorld() {
 }
 
 void GameWorld::fetchLevelLayout(string file1, string file2, string file3) {
-	fstream level1;
-	fstream level2;
-	fstream level3;
-
-	level1.open(file1);
-	level2.open(file2);
-	level3.open(file3);
+	
+	ofBuffer level = ofBufferFromFile(file1);
+	vector<string> lines;
+	for (auto line: level.getLines()) {
+		lines.push_back(line);
+	}
 
 	for (int i = 0; i < 4; ++i) {
-		//TODO
+		for (int j = 0; j < 12; ++j) {
+			this->levelLayout1[i][j] = lines.at(i).at(j);
+			cout << levelLayout1[i][j];
+		}
+		cout << "\n";
 	}
 }
 

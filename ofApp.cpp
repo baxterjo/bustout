@@ -11,7 +11,7 @@
 void ofApp::setup(){
 	gameWorld = new GameWorld();
 	paddle = new Paddle();
-	//gameWorld->fetchLevelLayout();
+	gameWorld->fetchLevelLayout("01.txt", "02.txt", "03.txt");
 	//gameWorld->generateBricks();
 	//gameWorld->generateBalls();
 	
