@@ -30,5 +30,6 @@ private:
 	float v;
 	float s;
 	ofColor color;
+	
 
 };
