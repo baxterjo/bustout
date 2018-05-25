@@ -11,7 +11,13 @@ Brick::Brick(float x, float y, char c) {
 	this->h = ofGetHeight() / 20;
 	this->strength = this->setStrength(c);
 	this->color = this->setColor(c);
-	this->exists = true;
+	if (c == ' ') {
+		this->exists = false;
+	}
+	else {
+		this->exists = true;
+	}
+	
 	if (chance > 90) {
 		this->powerup = true;
 	}
@@ -22,11 +28,29 @@ Brick::Brick(float x, float y, char c) {
 }
 
 void Brick::damage() {
-	//TODO
+	this->strength -= 1;
+	if (this->strength == 3) {
+		this->color = setColor('o');
+	}
+	else if (this->strength == 2) {
+		this->color = setColor('y');
+	}
+	else if (this->strength == 1) {
+		this->color = setColor('g');
+	}
+	else if (this->strength == 0) {
+		this->exists == false;
+		if (this->powerup == true) {
+			//dropPowerup(); TODO
+		}
+	}
 }
 
 void Brick::draw() {
-	//TODO
+	if (this->exists == true) {
+		ofSetColor(this->color);
+		ofDrawRectangle(this->x, this->y, this->w, this->h);
+	}
 }
 
 ofColor Brick::setColor(char c) {
@@ -57,4 +81,8 @@ int Brick::setStrength(char c) {
 	else if (c == 'g') {
 		return 1;
 	}
+}
+
+bool Brick::getExists() {
+	return this->exists;
 }

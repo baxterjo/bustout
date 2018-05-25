@@ -15,6 +15,7 @@ public:
 	void draw();
 	ofColor setColor(char c);
 	int setStrength(char c);
+	bool getExists();
 private:
 	float x;
 	float y;

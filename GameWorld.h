@@ -28,7 +28,7 @@ public:
 	enum Game_State getState();
 	bool noBricks();
 	bool noLives();
-	//Brick* generateBricks();
+	//Brick* generateBricks(Brick** bricks);
 	//Ball* generateBalls();
 
 private:
@@ -38,6 +38,7 @@ private:
 	char levelLayout2[4][12];
 	char levelLayout3[4][12];
 	enum Game_State gameState;
+	int score;
 	int level;
 	int lives;
 

@@ -9,6 +9,7 @@
 GameWorld::GameWorld() {
 	this->gameState = PLAY;
 	this->level = 1;
+	this->score = 0;
 }
 
 void GameWorld::fetchLevelLayout(string file1, string file2, string file3) {
@@ -59,10 +60,10 @@ void GameWorld::fetchLevelLayout(string file1, string file2, string file3) {
 }
 
 void GameWorld::nextLevel() {
-	//TODO
+	this->level += 1;
 }
 void GameWorld::changeState(enum Game_State gs) {
-	//TODO
+	this->gameState = gs;
 }
 void GameWorld::draw() {
 	//TODO
@@ -71,23 +72,28 @@ void GameWorld::resize() {
 	//TODO
 }
 void GameWorld::loseLife() {
-	//TODO
+	this->lives -= 1;
 }
 enum Game_State GameWorld::getState() {
-	//TODO
-	return PLAY;
+	return this->gameState;
 }
 bool GameWorld::noBricks() {
 	//TODO
 	return true;
 }
 bool GameWorld::noLives() {
-	//TODO
-	return true;
+	return this->lives = 0;
 }
-/*Brick* GameWorld::generateBricks() {
-	//TODO
+/*Brick* GameWorld::generateBricks(Brick** bricks) {
+	if (this->level == 1) {
+		for (int i = 0; i < 4; ++i) {
+			for (int j = 0; j < 12; ++j) {
+				bricks[i][j] = new Brick(ofGetWidth() *(j / 12), (i + 4) / 20, levelLayout1[i][j]);
+			}
+		}
+	}
+	
 }
-Ball* GameWorld::generateBalls() {
+/*Ball* GameWorld::generateBalls() {
 	//TODO
 }*/
