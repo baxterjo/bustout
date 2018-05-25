@@ -11,7 +11,8 @@ class Paddle {
 public:
 	Paddle();
 	void draw();
-	void move();
+	void move(int x);
+
 
 private:
 	float w;

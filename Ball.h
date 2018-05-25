@@ -24,10 +24,9 @@ public:
 	bool hitBrick();
 
 private:
-	float x;
-	float y;
+	ofVec2f position;
+	ofVec2f velocity;
 	float r;
-	float v;
 	float s;
 	ofColor color;
 	

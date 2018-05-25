@@ -4,7 +4,9 @@
 #include "Ball.h"
 
 Ball::Ball() {
-	//TODO
+	this->r = ofGetWidth() / 100;
+	this->s = 0;
+	this->position = ofVec2f(this->r * -1);
 }
 
 void Ball::move() {

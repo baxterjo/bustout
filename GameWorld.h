@@ -28,7 +28,6 @@ public:
 	enum Game_State getState();
 	bool noBricks();
 	bool noLives();
-	//Brick* generateBricks(Brick** bricks);
 	//Ball* generateBalls();
 
 private:
