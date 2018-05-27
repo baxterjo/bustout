@@ -6,7 +6,7 @@
 
 Paddle::Paddle() {
 	this->w = ofGetWidth() / 12;
-	this->h = ofGetHeight() / 20;
+	this->h = ofGetHeight() / 25;
 	this->x = 0;
 	this->y = ofGetHeight() - (this->h * 3);
 	this->big = false;
@@ -20,5 +20,5 @@ void Paddle::draw() {
 }
 
 void Paddle::move(int x) {
-	this->x = x;
+	this->x = x - (this->w/2);
 }

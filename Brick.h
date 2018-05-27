@@ -10,7 +10,8 @@ class Paddle;
 
 class Brick {
 public:
-	Brick(float x, float y, char c);
+	Brick(float y, float x, char c);
+	void generateBricks(vector<Brick*> bricks, GameWorld* gameWorld);
 	void damage();
 	void draw();
 	ofColor setColor(char c);

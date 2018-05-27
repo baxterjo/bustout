@@ -2,13 +2,14 @@
 //Jordan Baxter
 
 #include "Brick.h"
+#include "GameWorld.h"
 
-Brick::Brick(float x, float y, char c) {
+Brick::Brick(float y, float x, char c) {
 	int chance = ofRandom(100);
 	this->x = x;
 	this->y = y;
 	this->w = ofGetWidth() / 12;
-	this->h = ofGetHeight() / 20;
+	this->h = ofGetHeight() / 25;
 	this->strength = this->setStrength(c);
 	this->color = this->setColor(c);
 	if (c == ' ') {
@@ -26,6 +27,8 @@ Brick::Brick(float x, float y, char c) {
 	}
 	
 }
+
+
 
 void Brick::damage() {
 	this->strength -= 1;

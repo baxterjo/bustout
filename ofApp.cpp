@@ -12,7 +12,7 @@ void ofApp::setup(){
 	gameWorld = new GameWorld();
 	paddle = new Paddle();
 	gameWorld->fetchLevelLayout("01.txt", "02.txt", "03.txt");
-	//gameWorld->generateBricks();
+	gameWorld->generateBricks(bricks);
 	//gameWorld->generateBalls();
 	
 }
@@ -53,7 +53,9 @@ void ofApp::update(){
 void ofApp::draw(){
 	gameWorld->draw();
 	if (gameWorld->getState() == PLAY) {
-		//bricks->draw();
+		for (int i = 0; i < bricks.size(); ++i) {
+			bricks[i]->draw();
+		}
 		paddle->draw();
 		for (int i = 0; i < 5; ++i) {
 			balls[i]->draw();
@@ -105,7 +107,7 @@ void ofApp::mouseExited(int x, int y){
 
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
-	gameWorld->resize();
+	//gameWorld->resize();
 }
 
 //--------------------------------------------------------------

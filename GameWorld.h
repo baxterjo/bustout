@@ -23,11 +23,13 @@ public:
 	void nextLevel();
 	void changeState(enum Game_State gs);
 	void draw();
-	void resize();
+	void resize(Brick* brick, Paddle* paddle, Ball* ball);
 	void loseLife();
 	enum Game_State getState();
+	char getLayout(int i, int j);
 	bool noBricks();
 	bool noLives();
+	void generateBricks(vector<Brick*> bricks);
 	//Ball* generateBalls();
 
 private:
