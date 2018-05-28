@@ -9,18 +9,19 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+	ofHideCursor();
 	gameWorld = new GameWorld();
 	paddle = new Paddle();
 	gameWorld->fetchLevelLayout("01.txt", "02.txt", "03.txt");
 	gameWorld->generateBricks(bricks);
-	//gameWorld->generateBalls();
-	
+	gameWorld->generateBalls(balls);
+	balls[0]->spawn();
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
 	if (gameWorld->getState() == PLAY) {
-		for (int i = 0; i < 5; ++i) {
+		for (int i = 0; i < balls.size(); ++i) {
 			balls[i]->move();
 			if (balls[i]->hitWall()) {
 				balls[i]->bounceWall();
@@ -34,9 +35,9 @@ void ofApp::update(){
 			if (balls[i]->hitFloor()) {
 				gameWorld->loseLife();
 			}
-			if (balls[i]->hitBrick()) {
+			if (balls[i]->hitBrick(bricks)) {
 				balls[i]->bounceBrick();
-				//brick->damage();
+				balls[i]->damageBrick();
 			}
 		}
 
@@ -57,7 +58,7 @@ void ofApp::draw(){
 			bricks[i]->draw();
 		}
 		paddle->draw();
-		for (int i = 0; i < 5; ++i) {
+		for (int i = 0; i < balls.size(); ++i) {
 			balls[i]->draw();
 		}
 	}

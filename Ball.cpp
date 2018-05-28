@@ -6,19 +6,25 @@
 Ball::Ball() {
 	this->r = ofGetWidth() / 100;
 	this->s = 0;
-	this->position = ofVec2f(this->r * -1);
+	this->position = ofVec2f(this->r *-1);
+}
+
+void Ball::spawn() {
+	this->position = ofVec2f(ofGetWidth() / 2, ofGetHeight() / 2);
+	this->velocity = ofVec2f(ofRandom(-5, 5), -5);
 }
 
 void Ball::move() {
-
+	this->position += this->velocity;
 }
 
 void Ball::draw() {
-	//TODO
+	ofSetColor(this->color);
+	ofDrawCircle(this->position, this->r);
 }
 
 void Ball::bounceWall() {
-	//TODO
+	
 }
 
 void Ball::bounceCeiling() {
@@ -33,27 +39,30 @@ void Ball::bouncePaddle() {
 	//TODO
 }
 
+void Ball::damageBrick() {
+
+}
+
 bool Ball::hitPaddle() {
 	//TODO
 	return true;
 }
 
 bool Ball::hitWall() {
-	//TODO
-	return true;
+	return (this->position.x - this->r < 0 || this->position.x + this->r > ofGetWidth());
 }
 
 bool Ball::hitCeiling() {
-	//TODO
-	return true;
+	return this->position.y - this->r < 0;
 }
 
 bool Ball::hitFloor() {
-	//TODO
-	return true;
+	return this->position.y + this->r > ofGetHeight();
 }
 
-bool Ball::hitBrick() {
-	//TODO
+bool Ball::hitBrick(vector<Brick*> bricks) {
+	for (int i = 0; i < bricks.size(); ++i) {
+		//if (this->position.x>)
+	}
 	return true;
 }

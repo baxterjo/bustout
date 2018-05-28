@@ -12,7 +12,7 @@ class ofApp : public ofBaseApp{
 		GameWorld* gameWorld;
 		Paddle* paddle;
 		vector<Brick*> bricks;
-		Ball* balls[5];
+		vector<Ball*> balls;
 
 
 

@@ -92,6 +92,9 @@ char GameWorld::getLayout(int i, int j) {
 	else if (this->level == 3) {
 		return this->levelLayout3[i][j];
 	}
+	else {
+		return ' ';
+	}
 }
 
 bool GameWorld::noBricks() {
@@ -102,16 +105,20 @@ bool GameWorld::noLives() {
 	return this->lives = 0;
 }
 void GameWorld::generateBricks(vector<Brick*> bricks) {
-	cout << "Generating Bricks."<<"\n";
+	cout << "Generating Bricks...";
 	for (int i = 0; i < 4; ++i) {
 		for (int j = 0; j < 12; ++j) {
 			bricks.push_back(new Brick(ofGetHeight() * ((i + 3) / 25), ofGetHeight() *(j / 12), this->getLayout(i,j)));
-
+			//I think bricks stop working here, something to do with the level layout array, or not returning the vector properly.
 		}
 	}
 	cout << "Done." << "\n";
 }
 
-/*Ball* GameWorld::generateBalls() {
-	//TODO
-}*/
+void GameWorld::generateBalls(vector<Ball*> balls) {
+	cout << "Generating balls...";
+	for (int i = 0; i < 5; ++i) {
+		balls.push_back(new Ball());
+	}
+	cout << "Done \n";
+}

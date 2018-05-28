@@ -11,17 +11,20 @@ class Brick;
 class Ball {
 public:
 	Ball();
+	void spawn();
 	void move();
 	void draw();
 	void bounceWall();
 	void bounceCeiling();
 	void bounceBrick();
 	void bouncePaddle();
+	void damageBrick();
 	bool hitPaddle();
 	bool hitWall();
 	bool hitCeiling();
 	bool hitFloor();
-	bool hitBrick();
+	bool hitBrick(vector<Brick*> bricks);
+
 
 private:
 	ofVec2f position;
@@ -29,6 +32,6 @@ private:
 	float r;
 	float s;
 	ofColor color;
-	
+	bool superBall;
 
 };

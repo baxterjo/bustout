@@ -30,7 +30,7 @@ public:
 	bool noBricks();
 	bool noLives();
 	void generateBricks(vector<Brick*> bricks);
-	//Ball* generateBalls();
+	void generateBalls(vector<Ball*> balls);
 
 private:
 
