@@ -119,6 +119,7 @@ void GameWorld::generateBalls(vector<Ball*> balls) {
 	cout << "Generating balls...";
 	for (int i = 0; i < 5; ++i) {
 		balls.push_back(new Ball());
+		// I think balls is breaking here. I think the after this function runs the vector reverts to empty.
 	}
 	cout << "Done \n";
 }

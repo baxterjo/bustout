@@ -2,6 +2,8 @@
 //Jordan Baxter
 
 #include "Ball.h"
+#include "Paddle.h"
+#include "Brick.h"
 
 Ball::Ball() {
 	this->r = ofGetWidth() / 100;
@@ -24,28 +26,49 @@ void Ball::draw() {
 }
 
 void Ball::bounceWall() {
-	
+	this->velocity.x *= -1;
+	this->velocity.y += this->s;
+	if (this->velocity.y < 0 && this->position.x + this->r > ofGetWidth()) {
+		this->s += .5;
+	}
+	else if (this->velocity.y > 0 && this->position.x + this->r > ofGetWidth()) {
+		this->s += -.5;
+	}
+	else  if (this->velocity.y < 0 && this->position.x - this->r < 0) {
+		this->s += -.5;
+	}
+	else if (this->velocity.y > 0 && this->position.x - this->r < 0) {
+		this->s += .5;
+	}
 }
 
 void Ball::bounceCeiling() {
-	//TODO
+	this->velocity.y *= -1;
+	this->velocity.x += this->s;
+	if (this->velocity.x < 0) {
+		this->s += .5;
+	}
+	else if (this->velocity.x > 0) {
+		this->s += -.5;
+	}
 }
 
 void Ball::bounceBrick() {
 	//TODO
 }
 
-void Ball::bouncePaddle() {
-	//TODO
+void Ball::bouncePaddle(Paddle* paddle) {
+	this->velocity.y *= -1;
+	this->velocity.x += ofMap(this->position.x, paddle->getX(), (paddle->getX() + paddle->getW()), -2, 2);
 }
 
 void Ball::damageBrick() {
 
 }
 
-bool Ball::hitPaddle() {
-	//TODO
-	return true;
+bool Ball::hitPaddle(Paddle* paddle) {
+	
+	return (this->position.x > paddle->getX() && this->position.x < paddle->getX() + paddle->getW() && this->position.y > paddle->getY());
 }
 
 bool Ball::hitWall() {
@@ -62,7 +85,9 @@ bool Ball::hitFloor() {
 
 bool Ball::hitBrick(vector<Brick*> bricks) {
 	for (int i = 0; i < bricks.size(); ++i) {
-		//if (this->position.x>)
+		if ((this->position.x > bricks[i]->getX()) && (this->position.x < bricks[i]->getX() + bricks[i]->getW()) && (this->position.y + this->r > bricks[i]->getY() || this->position.y - this->r < bricks[i]->getY() + bricks[i]->getW())) {
+			return true;
+		}
 	}
-	return true;
+	
 }

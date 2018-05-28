@@ -15,7 +15,6 @@ void ofApp::setup(){
 	gameWorld->fetchLevelLayout("01.txt", "02.txt", "03.txt");
 	gameWorld->generateBricks(bricks);
 	gameWorld->generateBalls(balls);
-	balls[0]->spawn();
 }
 
 //--------------------------------------------------------------
@@ -29,8 +28,8 @@ void ofApp::update(){
 			if (balls[i]->hitCeiling()) {
 				balls[i]->bounceCeiling();
 			}
-			if (balls[i]->hitPaddle()) {
-				balls[i]->bouncePaddle();
+			if (balls[i]->hitPaddle(paddle)) {
+				balls[i]->bouncePaddle(paddle);
 			}
 			if (balls[i]->hitFloor()) {
 				gameWorld->loseLife();

@@ -17,6 +17,11 @@ public:
 	ofColor setColor(char c);
 	int setStrength(char c);
 	bool getExists();
+	float getX();
+	float getY();
+	float getW();
+	float getH();
+
 private:
 	float x;
 	float y;

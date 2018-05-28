@@ -42,7 +42,7 @@ void Brick::damage() {
 		this->color = setColor('g');
 	}
 	else if (this->strength == 0) {
-		this->exists == false;
+		this->exists = false;
 		if (this->powerup == true) {
 			//dropPowerup(); TODO
 		}
@@ -88,4 +88,20 @@ int Brick::setStrength(char c) {
 
 bool Brick::getExists() {
 	return this->exists;
+}
+
+float Brick::getX() {
+	return this->x;
+}
+
+float Brick::getY() {
+	return this->y;
+}
+
+float Brick::getW() {
+	return this->w;
+}
+
+float Brick::getH() {
+	return this->h;
 }

@@ -22,3 +22,15 @@ void Paddle::draw() {
 void Paddle::move(int x) {
 	this->x = x - (this->w/2);
 }
+
+float Paddle::getX() {
+	return this->x;
+}
+
+float Paddle::getY() {
+	return this->y;
+}
+
+float Paddle::getW() {
+	return this->w;
+}

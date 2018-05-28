@@ -12,6 +12,9 @@ public:
 	Paddle();
 	void draw();
 	void move(int x);
+	float getX();
+	float getY();
+	float getW();
 
 
 private:
