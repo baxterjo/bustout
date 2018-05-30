@@ -16,13 +16,15 @@ GameWorld::GameWorld() {
 void GameWorld::fetchLevelLayout(string file1, string file2, string file3) {
 	cout << "Fetching level layouts. \n";
 	ofBuffer level = ofBufferFromFile(file1);
+	cout << level.getText();
 	vector<string> lines;
 	for (auto line: level.getLines()) {
 		lines.push_back(line);
+		cout << line << "\n";
 	}
 
-	for (int i = 0; i < 4; ++i) {
-		for (int j = 0; j < 12; ++j) {
+	for (int i = 0; i < lines.size(); ++i) {
+		for (int j = 0; j < lines.at(i).size(); ++j) {
 			this->levelLayout1[i][j] = lines.at(i).at(j);
 			cout << levelLayout1[i][j];
 		}
@@ -36,8 +38,8 @@ void GameWorld::fetchLevelLayout(string file1, string file2, string file3) {
 		lines.push_back(line);
 	}
 
-	for (int i = 0; i < 4; ++i) {
-		for (int j = 0; j < 12; ++j) {
+	for (int i = 0; i < lines.size(); ++i) {
+		for (int j = 0; j < lines.at(i).size(); ++j) {
 			this->levelLayout2[i][j] = lines.at(i).at(j);
 			cout << levelLayout2[i][j];
 		}
@@ -51,8 +53,8 @@ void GameWorld::fetchLevelLayout(string file1, string file2, string file3) {
 		lines.push_back(line);
 	}
 
-	for (int i = 0; i < 4; ++i) {
-		for (int j = 0; j < 12; ++j) {
+	for (int i = 0; i < lines.size(); ++i) {
+		for (int j = 0; j < lines.at(i).size(); ++j) {
 			this->levelLayout3[i][j] = lines.at(i).at(j);
 			cout << levelLayout3[i][j];
 		}
@@ -99,27 +101,27 @@ char GameWorld::getLayout(int i, int j) {
 
 bool GameWorld::noBricks() {
 	//TODO
+
 	return true;
 }
 bool GameWorld::noLives() {
 	return this->lives = 0;
 }
-void GameWorld::generateBricks(vector<Brick*> bricks) {
+void GameWorld::generateBricks(vector<Brick*> &bricks) {
 	cout << "Generating Bricks...";
+
 	for (int i = 0; i < 4; ++i) {
 		for (int j = 0; j < 12; ++j) {
-			bricks.push_back(new Brick(ofGetHeight() * ((i + 3) / 25), ofGetHeight() *(j / 12), this->getLayout(i,j)));
-			//I think bricks stop working here, something to do with the level layout array, or not returning the vector properly.
+			bricks.push_back(new Brick(ofGetHeight() * ((i + 3) / 25.0), ofGetWidth() * (j / 12.0), this->getLayout(i,j)));
 		}
 	}
 	cout << "Done." << "\n";
 }
 
-void GameWorld::generateBalls(vector<Ball*> balls) {
+void GameWorld::generateBalls(vector<Ball*> &balls) {
 	cout << "Generating balls...";
 	for (int i = 0; i < 5; ++i) {
 		balls.push_back(new Ball());
-		// I think balls is breaking here. I think the after this function runs the vector reverts to empty.
 	}
 	cout << "Done \n";
 }

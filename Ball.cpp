@@ -13,7 +13,7 @@ Ball::Ball() {
 
 void Ball::spawn() {
 	this->position = ofVec2f(ofGetWidth() / 2, ofGetHeight() / 2);
-	this->velocity = ofVec2f(ofRandom(-5, 5), -5);
+	this->velocity = ofVec2f(ofRandom(-3, 3), -3);
 }
 
 void Ball::move() {
@@ -29,16 +29,16 @@ void Ball::bounceWall() {
 	this->velocity.x *= -1;
 	this->velocity.y += this->s;
 	if (this->velocity.y < 0 && this->position.x + this->r > ofGetWidth()) {
-		this->s += .5;
+		this->s += .2;
 	}
 	else if (this->velocity.y > 0 && this->position.x + this->r > ofGetWidth()) {
-		this->s += -.5;
+		this->s += -.2;
 	}
 	else  if (this->velocity.y < 0 && this->position.x - this->r < 0) {
-		this->s += -.5;
+		this->s += -.2;
 	}
 	else if (this->velocity.y > 0 && this->position.x - this->r < 0) {
-		this->s += .5;
+		this->s += .2;
 	}
 }
 
@@ -59,7 +59,7 @@ void Ball::bounceBrick() {
 
 void Ball::bouncePaddle(Paddle* paddle) {
 	this->velocity.y *= -1;
-	this->velocity.x += ofMap(this->position.x, paddle->getX(), (paddle->getX() + paddle->getW()), -2, 2);
+	this->velocity.x += ofMap(this->position.x, paddle->getX(), (paddle->getX() + paddle->getW()), -4, 4);
 }
 
 void Ball::damageBrick() {

@@ -50,7 +50,7 @@ void Brick::damage() {
 }
 
 void Brick::draw() {
-	if (this->exists == true) {
+	if (this->exists) {
 		ofSetColor(this->color);
 		ofDrawRectangle(this->x, this->y, this->w, this->h);
 	}

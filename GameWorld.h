@@ -29,8 +29,8 @@ public:
 	char getLayout(int i, int j);
 	bool noBricks();
 	bool noLives();
-	void generateBricks(vector<Brick*> bricks);
-	void generateBalls(vector<Ball*> balls);
+	void generateBricks(vector<Brick*> &bricks);
+	void generateBalls(vector<Ball*> &balls);
 
 private:
 

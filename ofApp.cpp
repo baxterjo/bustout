@@ -9,12 +9,14 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+	ofSetFrameRate(60);
 	ofHideCursor();
 	gameWorld = new GameWorld();
 	paddle = new Paddle();
 	gameWorld->fetchLevelLayout("01.txt", "02.txt", "03.txt");
 	gameWorld->generateBricks(bricks);
 	gameWorld->generateBalls(balls);
+	balls[0]->spawn();
 }
 
 //--------------------------------------------------------------
