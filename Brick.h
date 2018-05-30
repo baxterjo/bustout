@@ -16,16 +16,14 @@ public:
 	ofColor setColor(char c);
 	int setStrength(char c);
 	bool getExists();
+	ofRectangle getStructure();
 	float getX();
 	float getY();
 	float getW();
 	float getH();
 
 private:
-	float x;
-	float y;
-	float w;
-	float h;
+	ofRectangle box;
 	ofColor color;
 	int strength;
 	bool powerup;

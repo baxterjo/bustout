@@ -6,10 +6,7 @@
 
 Brick::Brick(float y, float x, char c) {
 	int chance = ofRandom(100);
-	this->x = x;
-	this->y = y;
-	this->w = ofGetWidth() / 12;
-	this->h = ofGetHeight() / 25;
+	this->box = ofRectangle(x, y, ofGetWidth() / 12, ofGetHeight() / 25);
 	this->strength = this->setStrength(c);
 	this->color = this->setColor(c);
 	if (c == ' ') {
@@ -52,7 +49,7 @@ void Brick::damage() {
 void Brick::draw() {
 	if (this->exists) {
 		ofSetColor(this->color);
-		ofDrawRectangle(this->x, this->y, this->w, this->h);
+		ofDrawRectangle(this->box);
 	}
 }
 
@@ -90,18 +87,22 @@ bool Brick::getExists() {
 	return this->exists;
 }
 
+ofRectangle Brick::getStructure() {
+	return this->box;
+}
+
 float Brick::getX() {
-	return this->x;
+	return this->box.x;
 }
 
 float Brick::getY() {
-	return this->y;
+	return this->box.y;
 }
 
 float Brick::getW() {
-	return this->w;
+	return this->box.width;
 }
 
 float Brick::getH() {
-	return this->h;
+	return this->box.height;
 }

@@ -7,8 +7,9 @@
 
 Ball::Ball() {
 	this->r = ofGetWidth() / 100;
+	this->position = ofVec2f(this->r *= -1);
+	this->box = ofRectangle(this-> position, this->r, this->r);
 	this->s = 0;
-	this->position = ofVec2f(this->r *-1);
 }
 
 void Ball::spawn() {
@@ -22,7 +23,7 @@ void Ball::move() {
 
 void Ball::draw() {
 	ofSetColor(this->color);
-	ofDrawCircle(this->position, this->r);
+	ofDrawCircle(this->box.x + r, this->box.y + r, this->r);
 }
 
 void Ball::bounceWall() {
@@ -54,40 +55,39 @@ void Ball::bounceCeiling() {
 }
 
 void Ball::bounceBrick() {
-	//TODO
+	this->velocity.y *= -1;
 }
 
 void Ball::bouncePaddle(Paddle* paddle) {
 	this->velocity.y *= -1;
-	this->velocity.x += ofMap(this->position.x, paddle->getX(), (paddle->getX() + paddle->getW()), -4, 4);
+	this->velocity.x += ofMap(this->position.x +r , paddle->getX(), (paddle->getX() + paddle->getW()), -4, 4);
 }
 
 void Ball::damageBrick() {
 
 }
 
-bool Ball::hitPaddle(Paddle* paddle) {
-	
-	return (this->position.x > paddle->getX() && this->position.x < paddle->getX() + paddle->getW() && this->position.y + this->r > paddle->getY());
+bool Ball::hitPaddle(Paddle* &paddle) {
+	ofRectangle paddleBox = paddle->getStructure();
+	return this->box.intersects(paddleBox);
 }
 
 bool Ball::hitWall() {
-	return (this->position.x - this->r < 0 || this->position.x + this->r > ofGetWidth());
+	return (this->position.x < 0 || this->position.x + this->r * 2 > ofGetWidth());
 }
 
 bool Ball::hitCeiling() {
-	return this->position.y - this->r < 0;
+	return this->position.y < 0;
 }
 
 bool Ball::hitFloor() {
 	return this->position.y + this->r > ofGetHeight();
 }
 
-bool Ball::hitBrick(vector<Brick*> bricks) {
+bool Ball::hitBrick(vector<Brick*> &bricks) {
 	for (int i = 0; i < bricks.size(); ++i) {
-		if ((this->position.x > bricks[i]->getX()) && (this->position.x < bricks[i]->getX() + bricks[i]->getW()) && (this->position.y + this->r > bricks[i]->getY() || this->position.y - this->r < bricks[i]->getY() + bricks[i]->getW())) {
-			return true;
-		}
+		ofRectangle structure = bricks[i]->getStructure();
+		return structure.intersects(this->box);	
 	}
 	
 }

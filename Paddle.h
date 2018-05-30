@@ -15,9 +15,11 @@ public:
 	float getX();
 	float getY();
 	float getW();
+	ofRectangle getStructure();
 
 
 private:
+	ofRectangle box;
 	float w;
 	float h;
 	float x;

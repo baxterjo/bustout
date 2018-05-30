@@ -19,16 +19,18 @@ public:
 	void bounceBrick();
 	void bouncePaddle(Paddle* paddle);
 	void damageBrick();
-	bool hitPaddle(Paddle* paddle);
+	bool hitPaddle(Paddle* &paddle);
 	bool hitWall();
 	bool hitCeiling();
 	bool hitFloor();
-	bool hitBrick(vector<Brick*> bricks);
+	bool hitBrick(vector<Brick*> &bricks);
+	
 
 
 private:
 	ofVec2f position;
 	ofVec2f velocity;
+	ofRectangle box;
 	float r;
 	float s;
 	ofColor color;

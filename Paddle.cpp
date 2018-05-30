@@ -5,22 +5,23 @@
 #include "ofMain.h"
 
 Paddle::Paddle() {
-	this->w = ofGetWidth() / 12;
-	this->h = ofGetHeight() / 25;
-	this->x = 0;
-	this->y = ofGetHeight() - (this->h * 3);
+	this->box = ofRectangle(0, ofGetHeight() - ofGetHeight() * 3 / 25, ofGetWidth() / 12, ofGetHeight() / 25);
 	this->big = false;
 	this->sticky = false;
 	this->laser = false;
 
-}
+};
 void Paddle::draw() {
 	ofSetColor(255);
-	ofDrawRectangle(this->x, this->y, this->w, this->h);
+	ofDrawRectangle(this->box);
 }
 
 void Paddle::move(int x) {
 	this->x = x - (this->w/2);
+}
+
+ofRectangle Paddle::getStructure() {
+	return this->box;
 }
 
 float Paddle::getX() {
