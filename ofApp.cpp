@@ -15,31 +15,33 @@ void ofApp::setup(){
 	paddle = new Paddle();
 	gameWorld->fetchLevelLayout("01.txt", "02.txt", "03.txt");
 	gameWorld->generateBricks(bricks);
-	gameWorld->generateBalls(balls);
-	balls[0]->spawn();
+	ball = new Ball();
+	ball->spawn();
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
 	if (gameWorld->getState() == PLAY) {
-		for (int i = 0; i < balls.size(); ++i) {
-			balls[i]->move();
-			if (balls[i]->hitWall()) {
-				balls[i]->bounceWall();
+		ball->move();
+			if (ball->hitWall()) {
+				ball->bounceWall();
 			}
-			if (balls[i]->hitCeiling()) {
-				balls[i]->bounceCeiling();
+			if (ball->hitCeiling()) {
+				ball->bounceCeiling();
 			}
-			if (balls[i]->hitPaddle(paddle)) {
-				balls[i]->bouncePaddle(paddle);
+			if (ball->hitPaddle(paddle)) {
+				ball->bouncePaddle(paddle);
 			}
-			if (balls[i]->hitFloor()) {
+			if (ball->hitFloor()) {
 				gameWorld->loseLife();
 			}
-			if (balls[i]->hitBrick(bricks)) {
-				balls[i]->bounceBrick();
-				balls[i]->damageBrick();
+			for (int i = 0; i < bricks.size(); ++i){
+				if (ball->hitBrick(bricks[i])) {
+					ball->bounceBrick();
+					ball->damageBrick();
+				}
 			}
+			
 		}
 
 		if (gameWorld->noLives()) {
@@ -48,7 +50,6 @@ void ofApp::update(){
 		if (gameWorld->noBricks()) {
 			gameWorld->nextLevel();
 		}
-	}
 }
 
 //--------------------------------------------------------------
@@ -59,9 +60,7 @@ void ofApp::draw(){
 			bricks[i]->draw();
 		}
 		paddle->draw();
-		for (int i = 0; i < balls.size(); ++i) {
-			balls[i]->draw();
-		}
+		ball->draw();
 	}
 }
 

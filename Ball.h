@@ -23,7 +23,7 @@ public:
 	bool hitWall();
 	bool hitCeiling();
 	bool hitFloor();
-	bool hitBrick(vector<Brick*> &bricks);
+	bool hitBrick(Brick* brick);
 	
 
 

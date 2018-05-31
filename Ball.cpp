@@ -13,7 +13,7 @@ Ball::Ball() {
 }
 
 void Ball::spawn() {
-	this->position = ofVec2f(ofGetWidth() / 2, ofGetHeight() / 2);
+	this->position = ofVec2f(ofGetWidth() / 1.5, ofGetHeight() / 1.5);
 	this->velocity = ofVec2f(ofRandom(-5, 5), -5);
 }
 
@@ -26,6 +26,7 @@ void Ball::move() {
 void Ball::draw() {
 	ofSetColor(this->color);
 	ofDrawCircle(this->box.x +r, this->box.y + r, this->r);
+	cout << "X:" << this->position.x << ' ' << "Y:" << this->position.y << "\n";
 }
 
 void Ball::bounceWall() {
@@ -86,16 +87,7 @@ bool Ball::hitFloor() {
 	return this->position.y + this->r > ofGetHeight();
 }
 
-bool Ball::hitBrick(vector<Brick*> &bricks) {
-	for (int i = 0; i < bricks.size(); ++i) {
-		cout << bricks.size();
-		if (bricks[i]->getExists()) {
-			ofRectangle brickBox = bricks[i]->getStructure();
-			return this->box.intersects(brickBox);
-		}
-		else {
-			return false;
-		}
-	}
-	
+bool Ball::hitBrick(Brick* brick) {
+	ofRectangle brickBox = brick->getStructure();
+	return this->box.intersects(brickBox);
 }

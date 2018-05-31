@@ -11,9 +11,11 @@ class Powerup {
 public:
 	Powerup();
 	void draw();
-	void spawn();
+	void fall();
 	void move();
-	void despawn();
+	void miss();
+	void hit();
+
 private:
 	float x;
 	float y;
