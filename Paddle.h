@@ -2,6 +2,7 @@
 //Jordan Baxter
 
 #pragma once
+#include "ofMain.h"
 
 class GameWorld;
 class Brick;
@@ -17,8 +18,8 @@ public:
 	float getW();
 	ofRectangle getStructure();
 
-
 private:
+
 	ofRectangle box;
 	float w;
 	float h;

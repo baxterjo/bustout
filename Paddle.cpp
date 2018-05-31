@@ -10,14 +10,15 @@ Paddle::Paddle() {
 	this->sticky = false;
 	this->laser = false;
 
-};
+}
+
 void Paddle::draw() {
 	ofSetColor(255);
 	ofDrawRectangle(this->box);
 }
 
 void Paddle::move(int x) {
-	this->x = x - (this->w/2);
+	this->box.x = x - (this->box.width/2);
 }
 
 ofRectangle Paddle::getStructure() {
@@ -25,13 +26,13 @@ ofRectangle Paddle::getStructure() {
 }
 
 float Paddle::getX() {
-	return this->x;
+	return this->box.x;
 }
 
 float Paddle::getY() {
-	return this->y;
+	return this->box.y;
 }
 
 float Paddle::getW() {
-	return this->w;
+	return this->box.width;
 }

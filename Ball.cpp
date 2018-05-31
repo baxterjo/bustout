@@ -19,11 +19,13 @@ void Ball::spawn() {
 
 void Ball::move() {
 	this->position += this->velocity;
+	this->box.x = this->position.x;
+	this->box.y = this->position.y;
 }
 
 void Ball::draw() {
 	ofSetColor(this->color);
-	ofDrawCircle(this->box.x + r, this->box.y + r, this->r);
+	ofDrawCircle(this->box.x +r, this->box.y + r, this->r);
 }
 
 void Ball::bounceWall() {
@@ -86,8 +88,14 @@ bool Ball::hitFloor() {
 
 bool Ball::hitBrick(vector<Brick*> &bricks) {
 	for (int i = 0; i < bricks.size(); ++i) {
-		ofRectangle structure = bricks[i]->getStructure();
-		return structure.intersects(this->box);	
+		cout << bricks.size();
+		if (bricks[i]->getExists()) {
+			ofRectangle brickBox = bricks[i]->getStructure();
+			return this->box.intersects(brickBox);
+		}
+		else {
+			return false;
+		}
 	}
 	
 }

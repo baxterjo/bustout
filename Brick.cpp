@@ -22,7 +22,6 @@ Brick::Brick(float y, float x, char c) {
 	else {
 		this->powerup = false;
 	}
-	
 }
 
 
