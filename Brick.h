@@ -13,6 +13,7 @@ public:
 	Brick(float y, float x, char c);
 	void damage();
 	void draw();
+	void godHand();
 	ofColor setColor(char c);
 	int setStrength(char c);
 	bool getExists();

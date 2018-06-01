@@ -27,14 +27,14 @@ public:
 	void loseLife();
 	enum Game_State getState();
 	char getLayout(int i, int j);
-	bool noBricks();
+	bool noBricks(vector<Brick*> &bricks);
 	bool noLives();
 	void generateBricks(vector<Brick*> &bricks);
 	void generateBalls(vector<Ball*> &balls);
 
 private:
 
-
+	ofTrueTypeFont gamefont;
 	char levelLayout1[4][12];
 	char levelLayout2[4][12];
 	char levelLayout3[4][12];

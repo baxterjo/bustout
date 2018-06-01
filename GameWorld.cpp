@@ -8,6 +8,7 @@
 #include "ofMain.h"
 
 GameWorld::GameWorld() {
+	this->gamefont.load("Paradox.ttf", ofGetWidth() / 10, true, true);
 	this->gameState = PLAY;
 	this->level = 1;
 	this->score = 0;
@@ -70,7 +71,7 @@ void GameWorld::changeState(enum Game_State gs) {
 	this->gameState = gs;
 }
 void GameWorld::draw() {
-	//TODO
+	
 }
 void GameWorld::resize(Brick* brick, Paddle* paddle, Ball* ball) {
 	//brick->resize();
@@ -99,15 +100,22 @@ char GameWorld::getLayout(int i, int j) {
 	}
 }
 
-bool GameWorld::noBricks() {
-	//TODO
-
-	return true;
+bool GameWorld::noBricks(vector<Brick*> &bricks) {
+	bool noBricks = true;
+	for (int i = 0; i < bricks.size(); ++i) {
+		if (bricks[i]->getExists()) {
+			noBricks = false;
+			break;
+		}
+			
+	}
+	return noBricks;
 }
 bool GameWorld::noLives() {
 	return this->lives = 0;
 }
 void GameWorld::generateBricks(vector<Brick*> &bricks) {
+	bricks.erase(bricks.begin(), bricks.end());
 	cout << "Generating Bricks...";
 
 	for (int i = 0; i < 4; ++i) {

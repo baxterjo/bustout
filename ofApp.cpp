@@ -34,11 +34,12 @@ void ofApp::update(){
 			}
 			if (ball->hitFloor()) {
 				gameWorld->loseLife();
+				ball->spawn();
 			}
 			for (int i = 0; i < bricks.size(); ++i){
 				if (ball->hitBrick(bricks[i])) {
 					ball->bounceBrick();
-					ball->damageBrick();
+					ball->damageBrick(bricks[i]);
 				}
 			}
 			
@@ -47,8 +48,9 @@ void ofApp::update(){
 		if (gameWorld->noLives()) {
 			gameWorld->changeState(LOSE);
 		}
-		if (gameWorld->noBricks()) {
+		if (gameWorld->noBricks(bricks)) {
 			gameWorld->nextLevel();
+			gameWorld->generateBricks(bricks);
 		}
 }
 
@@ -66,6 +68,11 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
+	if (key == 'k') {
+		for (int i = 0; i < bricks.size(); ++i) {
+			bricks[i]->godHand();
+		}
+	}
 	if (key == OF_KEY_RETURN && gameWorld->getState() == LOSE) {
 		gameWorld->changeState(PLAY);
 	}

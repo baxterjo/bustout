@@ -18,7 +18,7 @@ public:
 	void bounceCeiling();
 	void bounceBrick();
 	void bouncePaddle(Paddle* paddle);
-	void damageBrick();
+	void damageBrick(Brick* brick);
 	bool hitPaddle(Paddle* &paddle);
 	bool hitWall();
 	bool hitCeiling();

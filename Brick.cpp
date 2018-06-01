@@ -16,7 +16,7 @@ Brick::Brick(float y, float x, char c) {
 		this->exists = true;
 	}
 	
-	if (chance > 90) {
+	if (chance > 90 && this->exists) {
 		this->powerup = true;
 	}
 	else {
@@ -52,6 +52,10 @@ void Brick::draw() {
 	}
 }
 
+void Brick::godHand() {
+	this->exists = false;
+}
+
 ofColor Brick::setColor(char c) {
 	if (c == 'r') {
 		return ofColor(234, 41, 0);
@@ -64,6 +68,9 @@ ofColor Brick::setColor(char c) {
 	}
 	else if (c == 'g') {
 		return ofColor(44, 222, 0);
+	}
+	else {
+		return ofColor(0);
 	}
 }
 
@@ -79,6 +86,9 @@ int Brick::setStrength(char c) {
 	}
 	else if (c == 'g') {
 		return 1;
+	}
+	else {
+		return 0;
 	}
 }
 

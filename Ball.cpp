@@ -8,13 +8,13 @@
 Ball::Ball() {
 	this->r = ofGetWidth() / 100;
 	this->position = ofVec2f(this->r *= -1);
-	this->box = ofRectangle(this-> position, this->r, this->r);
+	this->box = ofRectangle(this-> position, this->r * 2, this->r * 2);
 	this->s = 0;
 }
 
 void Ball::spawn() {
-	this->position = ofVec2f(ofGetWidth() / 1.5, ofGetHeight() / 1.5);
-	this->velocity = ofVec2f(ofRandom(-5, 5), -5);
+	this->position = ofVec2f(ofGetWidth() / 1.5, ofGetHeight() / 2);
+	this->velocity = ofVec2f(ofRandom(-5, 5), 5);
 }
 
 void Ball::move() {
@@ -25,8 +25,7 @@ void Ball::move() {
 
 void Ball::draw() {
 	ofSetColor(this->color);
-	ofDrawCircle(this->box.x +r, this->box.y + r, this->r);
-	cout << "X:" << this->position.x << ' ' << "Y:" << this->position.y << "\n";
+	ofDrawCircle(this->box.x + r, this->box.y + r, this->r);
 }
 
 void Ball::bounceWall() {
@@ -66,8 +65,8 @@ void Ball::bouncePaddle(Paddle* paddle) {
 	this->velocity.x += ofMap(this->position.x +r , paddle->getX(), (paddle->getX() + paddle->getW()), -4, 4);
 }
 
-void Ball::damageBrick() {
-
+void Ball::damageBrick(Brick* brick) {
+	brick->damage();
 }
 
 bool Ball::hitPaddle(Paddle* &paddle) {
@@ -88,6 +87,9 @@ bool Ball::hitFloor() {
 }
 
 bool Ball::hitBrick(Brick* brick) {
-	ofRectangle brickBox = brick->getStructure();
-	return this->box.intersects(brickBox);
+	if (brick->getExists()) {
+		ofRectangle brickBox = brick->getStructure();
+		return this->box.intersects(brickBox);
+	}
+	
 }
