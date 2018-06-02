@@ -13,6 +13,11 @@ class ofApp : public ofBaseApp{
 		Paddle* paddle;
 		vector<Brick*> bricks;
 		Ball* ball;
+		ofSoundPlayer brickDamage;
+		ofSoundPlayer brickDestroy;
+		ofSoundPlayer hitWall;
+		ofSoundPlayer loseLife;
+		ofSoundPlayer hitPaddle;
 
 
 

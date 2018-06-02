@@ -75,7 +75,7 @@ bool Ball::hitPaddle(Paddle* &paddle) {
 }
 
 bool Ball::hitWall() {
-	return (this->position.x < 0 || this->position.x + this->r * 2 > ofGetWidth());
+	return (this->box.getMinX() < 0 || this->box.getMaxX() > ofGetWidth());
 }
 
 bool Ball::hitCeiling() {

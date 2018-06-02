@@ -8,8 +8,9 @@
 #include "ofMain.h"
 
 GameWorld::GameWorld() {
-	this->gamefont.load("Paradox.ttf", ofGetWidth() / 10, true, true);
+	this->gamefont.load("Paradox.ttf", ofGetWidth() / 40, true, true);
 	this->gameState = PLAY;
+	this->lives = 3;
 	this->level = 1;
 	this->score = 0;
 }
@@ -71,6 +72,9 @@ void GameWorld::changeState(enum Game_State gs) {
 	this->gameState = gs;
 }
 void GameWorld::draw() {
+	gamefont.drawString("LEVEL: " + ofToString(this->level), ofGetWidth() * 1 / 10, ofGetHeight() / 20);
+	gamefont.drawString("LIVES: " + ofToString(this->lives), ofGetWidth() * 3 / 10, ofGetHeight() / 20);
+	gamefont.drawString("SCORE: " + ofToString(this->score), ofGetWidth() * 5 / 10, ofGetHeight() / 20);
 	
 }
 void GameWorld::resize(Brick* brick, Paddle* paddle, Ball* ball) {
@@ -112,7 +116,7 @@ bool GameWorld::noBricks(vector<Brick*> &bricks) {
 	return noBricks;
 }
 bool GameWorld::noLives() {
-	return this->lives = 0;
+	return this->lives == 0;
 }
 void GameWorld::generateBricks(vector<Brick*> &bricks) {
 	bricks.erase(bricks.begin(), bricks.end());
@@ -132,4 +136,8 @@ void GameWorld::generateBalls(vector<Ball*> &balls) {
 		balls.push_back(new Ball());
 	}
 	cout << "Done \n";
+}
+
+void GameWorld::scoreUp(int x) {
+	this->score += x;
 }

@@ -11,12 +11,19 @@
 void ofApp::setup(){
 	ofSetFrameRate(60);
 	ofHideCursor();
+	ofSetBackgroundColor(0);
+	brickDamage.load("brickDamage.WAV", false);
+	brickDestroy.load("brickDestroy.WAV", false);
+	hitWall.load("hitWall.WAV", false);
+	loseLife.load("loseLife.WAV", false);
+	hitPaddle.load("hitPaddle.WAV", false);
 	gameWorld = new GameWorld();
 	paddle = new Paddle();
 	gameWorld->fetchLevelLayout("01.txt", "02.txt", "03.txt");
 	gameWorld->generateBricks(bricks);
 	ball = new Ball();
 	ball->spawn();
+	
 }
 
 //--------------------------------------------------------------
@@ -25,21 +32,32 @@ void ofApp::update(){
 		ball->move();
 			if (ball->hitWall()) {
 				ball->bounceWall();
+				hitWall.play();
 			}
 			if (ball->hitCeiling()) {
 				ball->bounceCeiling();
+				hitWall.play();
 			}
 			if (ball->hitPaddle(paddle)) {
 				ball->bouncePaddle(paddle);
+				hitPaddle.play();
 			}
 			if (ball->hitFloor()) {
 				gameWorld->loseLife();
 				ball->spawn();
+				loseLife.play();
 			}
 			for (int i = 0; i < bricks.size(); ++i){
 				if (ball->hitBrick(bricks[i])) {
 					ball->bounceBrick();
 					ball->damageBrick(bricks[i]);
+					gameWorld->scoreUp(10);
+					if (bricks[i]->getExists()) {
+						brickDamage.play();
+					}
+					else {
+						brickDestroy.play();
+					}
 				}
 			}
 			

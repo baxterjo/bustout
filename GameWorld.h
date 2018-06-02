@@ -31,6 +31,7 @@ public:
 	bool noLives();
 	void generateBricks(vector<Brick*> &bricks);
 	void generateBalls(vector<Ball*> &balls);
+	void scoreUp(int x);
 
 private:
 
