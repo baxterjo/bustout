@@ -5,6 +5,7 @@
 #include "GameWorld.h"
 #include "Ball.h"
 #include "Brick.h"
+#include "Powerup.h"
 
 class ofApp : public ofBaseApp{
 
@@ -13,6 +14,7 @@ class ofApp : public ofBaseApp{
 		Paddle* paddle;
 		vector<Brick*> bricks;
 		Ball* ball;
+		vector<Powerup*> powerups;
 		ofSoundPlayer brickDamage;
 		ofSoundPlayer brickDestroy;
 		ofSoundPlayer hitWall;

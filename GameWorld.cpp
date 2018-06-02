@@ -72,9 +72,19 @@ void GameWorld::changeState(enum Game_State gs) {
 	this->gameState = gs;
 }
 void GameWorld::draw() {
-	gamefont.drawString("LEVEL: " + ofToString(this->level), ofGetWidth() * 1 / 10, ofGetHeight() / 20);
-	gamefont.drawString("LIVES: " + ofToString(this->lives), ofGetWidth() * 3 / 10, ofGetHeight() / 20);
-	gamefont.drawString("SCORE: " + ofToString(this->score), ofGetWidth() * 5 / 10, ofGetHeight() / 20);
+	if (this->gameState == PLAY) {
+		gamefont.drawString("LEVEL: " + ofToString(this->level), ofGetWidth() * 1 / 10, ofGetHeight() / 20);
+		gamefont.drawString("LIVES: " + ofToString(this->lives), ofGetWidth() * 3 / 10, ofGetHeight() / 20);
+		gamefont.drawString("SCORE: " + ofToString(this->score), ofGetWidth() * 5 / 10, ofGetHeight() / 20);
+	}
+	else if (this->gameState == WIN) {
+		string winString = "YOU WIN ! \n CLICK ANYWHERE TO PLAY AGAIN ! \n SCORE: " + ofToString(this->score);
+		gamefont.drawString(winString, ofGetWidth() / 2 - gamefont.stringWidth(winString) / 2, ofGetHeight() / 2 - gamefont.stringHeight(winString) / 2);
+	}
+	else if (this->gameState == LOSE) {
+		string loseString = "YOU LOSE ! \n CLICK ANYWHERE TO TRY AGAIN. \n SCORE: " + ofToString(this->score);
+		gamefont.drawString(loseString, ofGetWidth() / 2 - gamefont.stringWidth(loseString) / 2, ofGetHeight() / 2 - gamefont.stringHeight(loseString));
+	}
 	
 }
 void GameWorld::resize(Brick* brick, Paddle* paddle, Ball* ball) {
@@ -140,4 +150,18 @@ void GameWorld::generateBalls(vector<Ball*> &balls) {
 
 void GameWorld::scoreUp(int x) {
 	this->score += x;
+}
+
+int GameWorld::getLevel() {
+	return this->level;
+}
+
+void GameWorld::reset(vector <Brick*> &bricks, Ball* ball) {
+	this->score = 0;
+	this->lives = 3;
+	this->gameState = PLAY;
+	this->level = 1;
+	this->generateBricks(bricks);
+	ball->spawn();
+	
 }

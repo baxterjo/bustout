@@ -32,6 +32,8 @@ public:
 	void generateBricks(vector<Brick*> &bricks);
 	void generateBalls(vector<Ball*> &balls);
 	void scoreUp(int x);
+	int getLevel();
+	void reset(vector <Brick*> &bricks, Ball* ball);
 
 private:
 

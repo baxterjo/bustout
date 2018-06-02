@@ -3,12 +3,15 @@
 
 #include "Brick.h"
 #include "GameWorld.h"
+#include "Powerup.h"
 
 Brick::Brick(float y, float x, char c) {
 	int chance = ofRandom(100);
 	this->box = ofRectangle(x, y, ofGetWidth() / 12, ofGetHeight() / 25);
 	this->strength = this->setStrength(c);
+	this->startStrength = this->setStrength(c);
 	this->color = this->setColor(c);
+	this->startColor = this->setColor(c);
 	if (c == ' ') {
 		this->exists = false;
 	}
@@ -40,7 +43,7 @@ void Brick::damage() {
 	else if (this->strength == 0) {
 		this->exists = false;
 		if (this->powerup == true) {
-			//dropPowerup(); TODO
+			
 		}
 	}
 }
@@ -114,4 +117,10 @@ float Brick::getW() {
 
 float Brick::getH() {
 	return this->box.height;
+}
+
+void Brick::reset(){
+	this->strength = this->startStrength;
+	this->color = this->startColor;
+	this->exists = true;
 }

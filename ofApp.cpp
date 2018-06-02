@@ -23,6 +23,9 @@ void ofApp::setup(){
 	gameWorld->generateBricks(bricks);
 	ball = new Ball();
 	ball->spawn();
+	for (int i = 0; i < 10; ++i) {
+		powerups.push_back(new Powerup());
+	}
 	
 }
 
@@ -66,7 +69,10 @@ void ofApp::update(){
 		if (gameWorld->noLives()) {
 			gameWorld->changeState(LOSE);
 		}
-		if (gameWorld->noBricks(bricks)) {
+		else if (gameWorld->noBricks(bricks) && gameWorld->getLevel() > 3) {
+			gameWorld->changeState(WIN);
+		}
+		else if (gameWorld->noBricks(bricks)) {
 			gameWorld->nextLevel();
 			gameWorld->generateBricks(bricks);
 		}
@@ -113,7 +119,9 @@ void ofApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-
+	if (gameWorld->getState() != PLAY && button == 0) {
+		gameWorld->reset(bricks, ball);
+	}
 }
 
 //--------------------------------------------------------------

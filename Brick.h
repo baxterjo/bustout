@@ -22,11 +22,14 @@ public:
 	float getY();
 	float getW();
 	float getH();
+	void reset();
 
 private:
 	ofRectangle box;
 	ofColor color;
+	ofColor startColor;
 	int strength;
+	int startStrength;
 	bool powerup;
 	bool exists;
 };
